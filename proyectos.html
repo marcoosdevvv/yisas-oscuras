@@ -8,9 +8,9 @@
 <title>otros proyectos · Jesús Villegas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="comun/base.css">
-<link rel="stylesheet" href="comun/noche.css">
-<link rel="stylesheet" href="comun/tele.css">
+<link rel="stylesheet" href="comun/base.css?v=1793653713">
+<link rel="stylesheet" href="comun/noche.css?v=1793653713">
+<link rel="stylesheet" href="comun/tele.css?v=1793653713">
 <style>
 /* Otros proyectos: la tele es la única luz del cuarto y lo tiñe del color de cada canal. */
 body{--luz:#E8201C;background:#030303}
@@ -31,9 +31,9 @@ main{position:relative;z-index:1;padding-top:104px;padding-bottom:90px}
   <div class="cab"><h1 class="h-l">otros proyectos</h1><p>Cambia de canal con el mando, deslizando la pantalla o con las flechas.</p></div>
   <div id="tele"></div>
 </main>
-<script src="comun/datos.js"></script>
-<script src="comun/ui.js"></script>
-<script src="comun/tele.js"></script>
+<script src="comun/datos.js?v=1793653713"></script>
+<script src="comun/ui.js?v=1793653713"></script>
+<script src="comun/tele.js?v=1793653713"></script>
 <script>
 Tele.montar(document.getElementById('tele'),{tema:'oscuro',onCanal:function(i,color){ document.body.style.setProperty('--luz',color); }});
 </script>
