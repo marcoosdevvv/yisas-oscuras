@@ -1,0 +1,21 @@
+/* Toda la web es una noche a oscuras. Colores de la cabecera, menú, grano de cámara y marcador de grabación. */
+body{--bg:#000;--fg:var(--nv-claro);--soft:#6f9e74;
+  --top-fg:var(--nv);--menu-bg:rgba(164,244,172,.12);--menu-fg:var(--nv);
+  --menu-sheet:#03140a;--menu-ink:var(--nv);--menu-hi:#fff;
+  --up-bg:var(--nv);--up-fg:#03140a}
+::selection{background:var(--nv);color:#03140a}
+
+.grano{position:fixed;inset:-50%;z-index:30;pointer-events:none;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grano .5s steps(4) infinite}
+@keyframes grano{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
+.lineas-tv{position:fixed;inset:0;z-index:29;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.24) 0 1px,transparent 1px 3px)}
+
+.hud{position:fixed;z-index:45;top:calc(62px + env(safe-area-inset-top,0px));left:var(--gx);right:var(--gx);display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:13px;color:var(--nv);font-variant-numeric:tabular-nums;pointer-events:none}
+.rec{color:#ff453a}
+.rec::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff453a;margin-right:6px;animation:rec-p 1s steps(2,start) infinite}
+@keyframes rec-p{to{visibility:hidden}}
+.ao{font-weight:900;letter-spacing:-.02em}
+.ao i{display:inline-block;width:.7em;height:.7em;border-radius:50%;background:var(--lima);vertical-align:-.04em;margin:0 .04em;font-style:normal}
+.btn-nv{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:99px;padding:15px 22px;font-weight:800;font-size:16px;line-height:1;text-decoration:none;background:var(--nv);color:#03140a;transition:transform .16s var(--ease-out),background-color .2s}
+.btn-nv:active{transform:scale(.97)}
+.btn-nv.sec{background:rgba(164,244,172,.12);color:var(--nv)}
+@media (prefers-reduced-motion: reduce){.grano{animation:none}}

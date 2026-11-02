@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23F0E424%22/%3E%3Ccircle cx=%2236%22 cy=%2240%22 r=%226%22/%3E%3Ccircle cx=%2264%22 cy=%2240%22 r=%226%22/%3E%3Cpath d=%22M30 60q20 22 40 0%22 stroke=%22black%22 stroke-width=%227%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>mi podcast · Jesús Villegas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comun/base.css">
+<link rel="stylesheet" href="comun/noche.css">
+<style>
+/* Mi podcast: un walkman grabado con la cámara nocturna de A Oscuras. La cinta se ve a través de la tapa,
+   las bobinas se vacían y se llenan, la aguja baila y salen la pregunta y el "Sí." como subtítulos. */
+main{min-height:100svh;padding-top:104px;padding-bottom:70px;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:56px;align-items:center}
+h1{margin:0 0 22px;font-weight:800;font-size:clamp(20px,2.2vw,28px);letter-spacing:-.02em;color:var(--nv)}
+.walkman{position:relative;width:min(440px,100%);margin:0 auto}
+.walkman::before{content:"";position:absolute;inset:-12% -18%;background:radial-gradient(closest-side,rgba(120,230,140,.20),transparent 72%);z-index:-1}
+.walkman svg{width:100%;height:auto;display:block;overflow:visible}
+.tecla{cursor:pointer;outline:none}
+.tecla rect{transition:transform .08s}
+.tecla:active rect.cap,.tecla.on rect.cap{transform:translateY(5px)}
+.tecla:focus-visible rect.cap{stroke:#fff;stroke-width:2.5}
+.cubo{transform-box:fill-box;transform-origin:center}
+.subs{min-height:clamp(240px,36vh,400px);display:flex;flex-direction:column;justify-content:center}
+.subs .preg{margin:0;font-weight:900;letter-spacing:-.045em;line-height:.95;font-size:clamp(38px,5.4vw,78px);color:var(--nv-claro);max-width:13ch;opacity:.18;transition:opacity .5s}
+.subs .resp{margin:12px 0 0;font-weight:900;letter-spacing:-.06em;line-height:.85;font-size:clamp(110px,16vw,240px);color:var(--nv);opacity:0;transform:translateY(16px);transition:opacity .4s,transform .7s var(--ease-out);text-shadow:0 0 36px rgba(164,244,172,.45)}
+.subs.p1 .preg{opacity:1}
+.subs.p2 .resp{opacity:1;transform:none}
+.ayuda{margin:16px 0 0;text-align:center;font-size:13px;font-weight:700;color:var(--soft)}
+.caras{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.caras a{flex-direction:column;align-items:flex-start;gap:4px;border-radius:16px;padding:14px 20px}
+.caras a small{font-weight:700;font-size:12px;opacity:.7}
+.caras a.activa{outline:3px solid var(--nv);outline-offset:3px}
+@media (max-width:860px){
+  main{grid-template-columns:minmax(0,1fr);gap:24px;align-content:start}
+  .walkman{width:min(360px,100%)}
+  .subs{min-height:0}
+}
+</style>
+</head>
+<body>
+<div class="grano" aria-hidden="true"></div>
+<header class="top"><a class="home" href="index.html">yisasvillegas</a><a class="menu-btn" href="index.html" data-menu>menú ≡</a></header>
+<main class="wrap">
+  <section>
+    <h1 id="tit"></h1>
+    <div class="walkman">
+      <svg viewBox="0 0 420 600" role="group" aria-label="Walkman con la cinta de A Oscuras">
+        <defs>
+          <linearGradient id="cuerpo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c5a2b"/><stop offset=".55" stop-color="#0c3517"/><stop offset="1" stop-color="#05200c"/></linearGradient>
+          <linearGradient id="canto" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f9c58"/><stop offset="1" stop-color="#0a2d13"/></linearGradient>
+          <linearGradient id="cristal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9ffde" stop-opacity=".22"/><stop offset=".35" stop-color="#d9ffde" stop-opacity="0"/></linearGradient>
+          <radialGradient id="cinta" cx=".5" cy=".5" r=".5"><stop offset=".55" stop-color="#174a22"/><stop offset=".96" stop-color="#0f3318"/><stop offset="1" stop-color="#2d6a3a"/></radialGradient>
+          <filter id="ruido" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="9" result="n"/><feColorMatrix in="n" values="0 0 0 0 .8  0 0 0 0 1  0 0 0 0 .8  0 0 0 .1 0" result="m"/><feComposite in="m" in2="SourceGraphic" operator="in" result="g"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="g"/></feMerge></filter>
+          <clipPath id="ventana"><rect x="58" y="104" width="304" height="214" rx="20"/></clipPath>
+        </defs>
+
+        <!-- teclas de arriba -->
+        <g class="tecla" id="k-rew" role="button" tabindex="0" aria-label="Rebobinar"><rect x="70" y="20" width="58" height="46" rx="8" fill="#0a2a12"/><rect class="cap" x="70" y="14" width="58" height="40" rx="8" fill="#2c7a41"/><path d="M106 26l-12 8 12 8zM94 26l-12 8 12 8z" fill="#cfeed3"/></g>
+        <g class="tecla" id="k-play" role="button" tabindex="0" aria-label="Play"><rect x="136" y="20" width="80" height="46" rx="8" fill="#0a2a12"/><rect class="cap" x="136" y="14" width="80" height="40" rx="8" fill="#53b56b"/><path d="M168 24l16 10-16 10z" fill="#04170a"/></g>
+        <g class="tecla" id="k-stop" role="button" tabindex="0" aria-label="Pausa"><rect x="224" y="20" width="58" height="46" rx="8" fill="#0a2a12"/><rect class="cap" x="224" y="14" width="58" height="40" rx="8" fill="#2c7a41"/><rect x="245" y="26" width="5" height="16" fill="#cfeed3"/><rect x="256" y="26" width="5" height="16" fill="#cfeed3"/></g>
+        <g class="tecla" id="k-flip" role="button" tabindex="0" aria-label="Dar la vuelta a la cinta"><rect x="290" y="20" width="58" height="46" rx="8" fill="#0a2a12"/><rect class="cap" x="290" y="14" width="58" height="40" rx="8" fill="#2c7a41"/><text x="319" y="40" text-anchor="middle" font-family="Schibsted Grotesk,Arial" font-weight="900" font-size="15" fill="#cfeed3">A/B</text></g>
+
+        <!-- cuerpo -->
+        <g filter="url(#ruido)">
+          <rect x="24" y="48" width="372" height="530" rx="38" fill="url(#canto)"/>
+          <rect x="30" y="52" width="360" height="518" rx="34" fill="url(#cuerpo)"/>
+        </g>
+        <text x="58" y="90" font-family="Schibsted Grotesk,Arial" font-weight="900" font-size="15" letter-spacing="2" fill="#8fe09f">A</text>
+        <circle cx="76" cy="85" r="5.5" fill="#B0E43C"/>
+        <text x="84" y="90" font-family="Schibsted Grotesk,Arial" font-weight="900" font-size="15" letter-spacing="2" fill="#8fe09f">SCURAS</text>
+        <text x="362" y="90" text-anchor="end" font-family="Schibsted Grotesk,Arial" font-weight="700" font-size="11" letter-spacing="1.5" fill="#5fb672">STEREO · 0% LUZ</text>
+
+        <!-- tapa con la cinta dentro -->
+        <rect x="52" y="98" width="316" height="226" rx="24" fill="#03140a" stroke="#2f7a43" stroke-width="2"/>
+        <g clip-path="url(#ventana)">
+          <rect x="70" y="118" width="280" height="186" rx="10" fill="#0a2d14" opacity=".95"/>
+          <rect x="84" y="128" width="252" height="40" rx="5" fill="#c8eccc"/>
+          <text x="98" y="155" font-family="Schibsted Grotesk,Arial" font-weight="900" font-size="19" fill="#06280f">A</text>
+          <circle cx="122" cy="148.5" r="7.5" fill="#06280f"/>
+          <text x="132" y="155" font-family="Schibsted Grotesk,Arial" font-weight="900" font-size="19" fill="#06280f">SCURAS</text>
+          <text id="lado" x="322" y="155" text-anchor="end" font-family="Schibsted Grotesk,Arial" font-weight="800" font-size="13" fill="#2b6b38">cara A</text>
+          <rect x="98" y="182" width="224" height="96" rx="48" fill="#020b05"/>
+          <circle id="rL" cx="150" cy="230" r="44" fill="url(#cinta)"/>
+          <circle id="rR" cx="270" cy="230" r="26" fill="url(#cinta)"/>
+          <g class="cubo" id="hL"><circle cx="150" cy="230" r="15" fill="#a9e3b0"/><g fill="#020b05"><rect x="147" y="217" width="6" height="7"/><rect x="147" y="236" width="6" height="7"/><rect x="137" y="227" width="7" height="6"/><rect x="156" y="227" width="7" height="6"/></g></g>
+          <g class="cubo" id="hR"><circle cx="270" cy="230" r="15" fill="#a9e3b0"/><g fill="#020b05"><rect x="267" y="217" width="6" height="7"/><rect x="267" y="236" width="6" height="7"/><rect x="257" y="227" width="7" height="6"/><rect x="276" y="227" width="7" height="6"/></g></g>
+          <path d="M106 290 L314 290" stroke="#174a22" stroke-width="4"/>
+          <circle cx="86" cy="290" r="4" fill="#2f7a43"/><circle cx="334" cy="290" r="4" fill="#2f7a43"/><circle cx="210" cy="294" r="5" fill="#2f7a43"/>
+          <path d="M58 104 L250 104 L120 318 L58 318 Z" fill="url(#cristal)"/>
+        </g>
+
+        <!-- vúmetro -->
+        <rect x="56" y="350" width="170" height="96" rx="12" fill="#c8eccc"/>
+        <path d="M78 428 A64 64 0 0 1 204 428" fill="none" stroke="#06280f" stroke-width="2"/>
+        <path d="M172 382 A64 64 0 0 1 204 428" fill="none" stroke="#E8201C" stroke-width="5"/>
+        <g stroke="#06280f" stroke-width="2"><path d="M86 404l6 4"/><path d="M110 386l3 6"/><path d="M141 380v7"/><path d="M172 386l-3 6"/><path d="M196 404l-6 4"/></g>
+        <text x="141" y="438" text-anchor="middle" font-family="Schibsted Grotesk,Arial" font-weight="900" font-size="12" fill="#06280f">VU</text>
+        <line id="aguja" x1="141" y1="440" x2="141" y2="374" stroke="#06280f" stroke-width="2.5" stroke-linecap="round" transform="rotate(-42 141 440)"/>
+        <circle cx="141" cy="440" r="5" fill="#06280f"/>
+
+        <!-- contador y luz -->
+        <rect x="246" y="350" width="118" height="46" rx="10" fill="#020b05"/>
+        <text id="contador" x="305" y="382" text-anchor="middle" font-family="Schibsted Grotesk,Arial" font-weight="800" font-size="24" letter-spacing="6" fill="#cfeed3">000</text>
+        <circle id="led" cx="262" cy="424" r="7" fill="#0e3a18"/>
+        <text x="276" y="429" font-family="Schibsted Grotesk,Arial" font-weight="800" font-size="12" fill="#5fb672">PLAY</text>
+
+        <!-- altavoz y rueda de volumen -->
+        <g fill="#05200c"><circle cx="72" cy="486" r="4"/><circle cx="88" cy="486" r="4"/><circle cx="104" cy="486" r="4"/><circle cx="120" cy="486" r="4"/><circle cx="72" cy="502" r="4"/><circle cx="88" cy="502" r="4"/><circle cx="104" cy="502" r="4"/><circle cx="120" cy="502" r="4"/><circle cx="72" cy="518" r="4"/><circle cx="88" cy="518" r="4"/><circle cx="104" cy="518" r="4"/><circle cx="120" cy="518" r="4"/></g>
+        <rect x="392" y="440" width="16" height="100" rx="6" fill="#1c5a2b"/>
+        <g stroke="#0a2d13" stroke-width="2"><path d="M394 452h12M394 464h12M394 476h12M394 488h12M394 500h12M394 512h12M394 524h12"/></g>
+        <text x="370" y="540" text-anchor="end" font-family="Schibsted Grotesk,Arial" font-weight="800" font-size="11" letter-spacing="1" fill="#5fb672">villegas ☺︎</text>
+        <!-- cable de los cascos -->
+        <path d="M360 48 C380 0 430 -10 440 40" fill="none" stroke="#2f7a43" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p class="ayuda">play · pausa · dar la vuelta a la cinta</p>
+  </section>
+  <section>
+    <div class="subs" id="subs" aria-live="polite">
+      <p class="preg" id="preg"></p>
+      <p class="resp" id="resp"></p>
+    </div>
+    <div class="caras">
+      <a class="btn-nv activa" id="yt" target="_blank" rel="noopener"><small>cara A</small>YouTube ↗</a>
+      <a class="btn-nv sec" id="sp" target="_blank" rel="noopener"><small>cara B</small>Spotify ↗</a>
+    </div>
+  </section>
+</main>
+<script src="comun/datos.js"></script>
+<script src="comun/ui.js"></script>
+<script>
+(function(){
+  var P=window.YISAS.podcast, reduce=YUI.reduce;
+  document.getElementById('tit').textContent=P.titulo;
+  document.getElementById('preg').textContent=P.pregunta;
+  document.getElementById('resp').textContent=P.respuesta;
+  var yt=document.getElementById('yt'), sp=document.getElementById('sp');
+  yt.href=P.youtube; sp.href=P.spotify;
+
+  var $=function(id){ return document.getElementById(id); };
+  var subs=$('subs'), hL=$('hL'), hR=$('hR'), rL=$('rL'), rR=$('rR'), aguja=$('aguja'), led=$('led'), cont=$('contador'), lado=$('lado');
+  var sonando=false, rapido=false, ang=0, pos=.15, vu=-42, cnt=0, t1=0, t2=0, last=0, b=false, ac=null;
+  function clic(){ try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); var o=ac.createOscillator(),g=ac.createGain(); o.type='square'; o.frequency.value=240; g.gain.setValueAtTime(.06,ac.currentTime); g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+.06); o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime+.07);}catch(e){} }
+  function pulsa(id){ var k=$(id); k.classList.add('on'); setTimeout(function(){ k.classList.remove('on'); },160); }
+  function frame(t){
+    requestAnimationFrame(frame);
+    var dt=Math.min(.05,(t-last)/1000||0); last=t;
+    var vel = sonando ? (rapido?-9:1) : 0;
+    if(vel){
+      pos=Math.max(0,Math.min(1,pos+dt*.012*vel));
+      if(pos===0) rapido=false;
+      ang+=dt*(rapido?-1100:160);
+      cnt+=dt*(rapido?-40:4); if(cnt<0) cnt=0;
+      cont.textContent=('00'+Math.floor(cnt)%1000).slice(-3);
+    }
+    var objetivo = sonando && !rapido ? -18+Math.sin(t/180)*16+Math.sin(t/57)*9+Math.random()*6 : -42;
+    vu+= (objetivo-vu)*.18;
+    aguja.setAttribute('transform','rotate('+vu.toFixed(1)+' 141 440)');
+    var a=44-18*pos, c=26+18*pos;
+    rL.setAttribute('r',a.toFixed(1)); rR.setAttribute('r',c.toFixed(1));
+    hL.style.transform='rotate('+ang.toFixed(1)+'deg)'; hR.style.transform='rotate('+(ang*1.2).toFixed(1)+'deg)';
+  }
+  function play(){
+    if(sonando && !rapido) return;
+    sonando=true; rapido=false; led.setAttribute('fill','#B0E43C');
+    subs.classList.remove('p1','p2');
+    clearTimeout(t1); clearTimeout(t2);
+    t1=setTimeout(function(){ subs.classList.add('p1'); },reduce?0:500);
+    t2=setTimeout(function(){ subs.classList.add('p2'); },reduce?0:2600);
+  }
+  function pausa(){ sonando=false; rapido=false; led.setAttribute('fill','#0e3a18'); clearTimeout(t1); clearTimeout(t2); }
+  function rew(){ sonando=true; rapido=true; led.setAttribute('fill','#0e3a18'); }
+  function flip(){
+    b=!b; lado.textContent=b?'cara B':'cara A';
+    yt.classList.toggle('activa',!b); sp.classList.toggle('activa',b);
+    yt.classList.toggle('sec',b); sp.classList.toggle('sec',!b);
+    pos=1-pos;
+  }
+  var acciones={'k-play':play,'k-stop':pausa,'k-rew':rew,'k-flip':flip};
+  Object.keys(acciones).forEach(function(id){
+    var k=$(id);
+    function go(){ clic(); pulsa(id); acciones[id](); }
+    k.addEventListener('click',go);
+    k.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } });
+  });
+  requestAnimationFrame(frame);
+  setTimeout(play,reduce?0:900);
+})();
+</script>
+</body>
+</html>

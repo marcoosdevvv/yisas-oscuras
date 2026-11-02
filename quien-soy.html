@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23F0E424%22/%3E%3Ccircle cx=%2236%22 cy=%2240%22 r=%226%22/%3E%3Ccircle cx=%2264%22 cy=%2240%22 r=%226%22/%3E%3Cpath d=%22M30 60q20 22 40 0%22 stroke=%22black%22 stroke-width=%227%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>quién soy · Jesús Villegas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comun/base.css">
+<link rel="stylesheet" href="comun/noche.css">
+<style>
+/* Quién soy: él es el invitado de su propio podcast. Las respuestas son su texto exacto; las preguntas son el marco. */
+main{padding-top:110px;padding-bottom:80px}
+.cab{margin-bottom:clamp(40px,6vw,80px)}
+.cab h1{color:var(--nv-claro)}
+.cab p{margin:16px 0 0;font-weight:700;font-size:18px;color:var(--soft)}
+.estudio{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+.camara{position:sticky;top:96px}
+.feed{position:relative;aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:var(--nv-fondo)}
+.feed img{width:100%;height:100%;object-fit:cover;filter:contrast(1.08) brightness(.92)}
+.feed::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 1px,transparent 1px 3px)}
+.feed-hud{position:absolute;z-index:2;top:16px;left:18px;right:18px;display:flex;justify-content:space-between;font-weight:800;font-size:13px;color:var(--nv);font-variant-numeric:tabular-nums}
+.sub{position:absolute;z-index:2;left:18px;right:18px;bottom:20px;text-align:center}
+.sub span{display:inline;background:rgba(0,0,0,.82);color:#fff;font-weight:700;font-size:clamp(15px,1.5vw,19px);line-height:1.6;padding:3px 8px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.transcripcion{display:flex;flex-direction:column;gap:clamp(70px,12vh,140px);padding-bottom:20vh}
+.qa{opacity:.32;transition:opacity .5s}
+.qa.activa{opacity:1}
+.q{display:inline-flex;align-items:center;gap:10px;margin:0 0 16px;background:var(--rojo);color:#fff;font-weight:900;font-size:clamp(20px,2vw,26px);letter-spacing:-.025em;line-height:1;padding:9px 12px}
+.q small{font-weight:700;font-size:12px;letter-spacing:0;opacity:.85;font-variant-numeric:tabular-nums}
+.a{margin:0;font-weight:700;font-size:clamp(22px,2.3vw,30px);line-height:1.32;letter-spacing:-.015em;color:var(--nv-claro);max-width:30ch}
+.a a{color:var(--nv);text-decoration-thickness:2px;text-underline-offset:4px}
+.redes{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0;padding:0;list-style:none}
+@media (max-width:860px){
+  .estudio{grid-template-columns:minmax(0,1fr);gap:24px}
+  .camara{top:64px;z-index:5}
+  .feed{aspect-ratio:16/11}
+  .feed img{object-position:50% 30%}
+  .transcripcion{gap:64px}
+}
+</style>
+</head>
+<body data-up>
+<div class="grano" aria-hidden="true"></div>
+<header class="top"><a class="home" href="index.html">yisasvillegas</a><a class="menu-btn" href="index.html" data-menu>menú ≡</a></header>
+<main class="wrap">
+  <div class="cab"><h1 class="h-xl">quién soy</h1><p>una entrevista a oscuras con Jesús Villegas</p></div>
+  <div class="estudio">
+    <div class="camara">
+      <div class="feed">
+        <img src="comun/img/yisas-cara.jpg" alt="Jesús Villegas grabado con cámara de visión nocturna">
+        <div class="feed-hud" aria-hidden="true"><span class="rec">REC</span><span class="ao">A <i></i>SCURAS</span><span id="tc">00:00:00</span></div>
+        <p class="sub" aria-hidden="true"><span id="sub"></span></p>
+      </div>
+    </div>
+    <div class="transcripcion" id="tr"></div>
+  </div>
+</main>
+<script src="comun/datos.js"></script>
+<script src="comun/ui.js"></script>
+<script>
+(function(){
+  var Y=window.YISAS, b=Y.bioCorta;
+  var preguntas=['¿quién eres?','¿a qué te dedicas?','¿cuál es tu mayor lucha?','¿de dónde vienes?','¿qué hay en esta web?','¿y si alguien es raro?'];
+  var tiempos=['00:00:12','00:00:31','00:01:04','00:01:47','00:02:20','00:02:41'];
+  var tr=document.getElementById('tr');
+  tr.innerHTML=preguntas.map(function(q,i){
+    return '<div class="qa" data-i="'+i+'"><p class="q"><small>'+tiempos[i]+'</small>'+q+'</p><p class="a">'+b[i]+'</p></div>';
+  }).join('') +
+  '<div class="qa" data-i="6"><p class="q"><small>00:03:02</small>¿dónde te encontramos?</p><ul class="redes">'+
+    Y.redes.map(function(r){ return '<li><a class="btn-nv" href="'+r.href+'" target="_blank" rel="noopener">'+r.texto+' ↗</a></li>'; }).join('')+'</ul></div>';
+
+  var sub=document.getElementById('sub'), tc=document.getElementById('tc'), qas=[].slice.call(tr.querySelectorAll('.qa'));
+  var textos=b.map(function(h){ var d=document.createElement('div'); d.innerHTML=h; return d.textContent; }).concat(['@yisasvillegas en todas mis redes']);
+  var actual=-1, typer=0;
+  function escribe(t){
+    clearInterval(typer);
+    if(YUI.reduce){ sub.textContent=t; return; }
+    var n=0; sub.textContent='';
+    typer=setInterval(function(){ n+=2; sub.textContent=t.slice(0,n); if(n>=t.length) clearInterval(typer); },22);
+  }
+  function activa(i){
+    if(i===actual) return; actual=i;
+    qas.forEach(function(q,j){ q.classList.toggle('activa',j===i); });
+    escribe(textos[i]); tc.textContent=(tiempos[i]||'00:03:02');
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting) activa(+e.target.dataset.i); });
+    },{rootMargin:'-45% 0px -45% 0px'});
+    qas.forEach(function(q){ io.observe(q); });
+  }
+  activa(0);
+})();
+</script>
+</body>
+</html>

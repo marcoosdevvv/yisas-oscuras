@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23F0E424%22/%3E%3Ccircle cx=%2236%22 cy=%2240%22 r=%226%22/%3E%3Ccircle cx=%2264%22 cy=%2240%22 r=%226%22/%3E%3Cpath d=%22M30 60q20 22 40 0%22 stroke=%22black%22 stroke-width=%227%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>soplo.studio · Jesús Villegas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comun/base.css">
+<link rel="stylesheet" href="comun/noche.css">
+<style>
+/* soplo.studio: a oscuras, como la portada. El dedo es la linterna infrarroja.
+   El logo está pintado con pintura fosforescente: cuando la linterna pasa por encima se carga y brilla solo en la oscuridad. */
+html,body{height:100%}
+body{overflow:hidden}
+.escena{--x:50%;--y:40%;--r:170px;position:fixed;inset:0;touch-action:none}
+.verde{position:absolute;inset:0;background:var(--nv-fondo);color:var(--nv);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 20px 120px;transition:background-color .6s,color .6s}
+.logo{width:min(52vw,300px,34vh);aspect-ratio:1}
+.logo svg,.brillo svg{width:100%;height:100%;overflow:visible}
+.logo path{fill:none;stroke:#5e8f63;stroke-width:17;stroke-linecap:round}
+.medidor{width:min(220px,56vw);height:6px;border-radius:3px;background:#0d2a13;margin-top:26px;overflow:hidden}
+.medidor i{display:block;height:100%;width:calc(var(--k,0) * 100%);background:#D8FF6A}
+.nota{margin:10px 0 0;font-size:13px;font-weight:700;color:var(--soft)}
+h1{margin:28px 0 0;font-weight:900;letter-spacing:-.05em;line-height:.9;font-size:clamp(50px,9vw,130px);color:var(--nv-claro)}
+.lineas{margin:18px 0 0}
+.lineas p{margin:0;font-weight:800;font-size:clamp(20px,2.4vw,30px);letter-spacing:-.02em;line-height:1.25}
+.acciones{margin-top:26px}
+.oscuro{position:absolute;inset:0;background:#000;pointer-events:none;-webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0,transparent 55%,rgba(0,0,0,.6) 78%,#000 100%);mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0,transparent 55%,rgba(0,0,0,.6) 78%,#000 100%);transition:opacity .6s}
+.brillo{position:fixed;z-index:3;pointer-events:none}
+.brillo path{fill:none;stroke:#D8FF6A;stroke-width:17;stroke-linecap:round;opacity:var(--e,0);filter:drop-shadow(0 0 calc(var(--e,0) * 22px) rgba(216,255,106,.85))}
+.abajo{position:fixed;z-index:46;left:0;right:0;bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center;gap:10px}
+.pista{margin:0;font-size:13px;font-weight:700;color:var(--soft);transition:opacity .4s}
+.tocado .pista{opacity:0}
+.interruptor{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:99px;padding:12px 18px 12px 12px;font-weight:800;font-size:15px;line-height:1;background:rgba(164,244,172,.12);color:var(--nv)}
+.interruptor i{width:34px;height:20px;border-radius:99px;background:#0a2a12;position:relative}
+.interruptor i::after{content:"";position:absolute;left:3px;top:3px;width:14px;height:14px;border-radius:50%;background:var(--nv);transition:transform .3s var(--ease-out)}
+.luz .oscuro,.luz .brillo,.luz .grano,.luz .pista{opacity:0}
+.luz .verde{background:#0B0B0B;color:#F5F5F0}
+.luz .logo path{stroke:var(--amarillo)}
+.luz .lineas p+p{color:var(--amarillo)}
+.luz .interruptor{background:#F0E424;color:#0B0B0B}
+.luz .interruptor i{background:#0B0B0B}
+.luz .interruptor i::after{transform:translateX(14px);background:#F0E424}
+.grano{transition:opacity .5s}
+</style>
+</head>
+<body>
+<div class="grano" aria-hidden="true"></div>
+<header class="top" style="z-index:47"><a class="home" href="index.html">yisasvillegas</a><a class="menu-btn" href="index.html" data-menu>menú ≡</a></header>
+<main class="escena" id="escena">
+  <div class="verde">
+    <div class="logo" id="logo" role="img" aria-label="Logo de soplo.studio">
+      <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M145 47.5 A65 65 0 1 0 165 95"/><path d="M80 65 V105"/><path d="M110 60 V105"/><path d="M137.5 77.5 V107.5"/></svg>
+    </div>
+    <div class="medidor" aria-hidden="true"><i></i></div>
+    <p class="nota">pintura fosforescente · cárgala con la linterna</p>
+    <h1 id="tit"></h1>
+    <div class="lineas" id="lineas"></div>
+    <div class="acciones"><a class="btn-nv" id="ig" target="_blank" rel="noopener"></a></div>
+  </div>
+  <div class="oscuro" aria-hidden="true"></div>
+</main>
+<div class="brillo" id="brillo" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M145 47.5 A65 65 0 1 0 165 95"/><path d="M80 65 V105"/><path d="M110 60 V105"/><path d="M137.5 77.5 V107.5"/></svg></div>
+<div class="abajo">
+  <p class="pista">pasa la linterna por el logo</p>
+  <button class="interruptor" id="interruptor" type="button" aria-pressed="false"><i aria-hidden="true"></i><span>encender la luz</span></button>
+</div>
+<script src="comun/datos.js"></script>
+<script src="comun/ui.js"></script>
+<script>
+(function(){
+  var S=window.YISAS.soplo, reduce=YUI.reduce;
+  document.getElementById('tit').textContent=S.titulo;
+  document.getElementById('lineas').innerHTML=S.lineas.map(function(l){ return '<p>'+l+'</p>'; }).join('');
+  var ig=document.getElementById('ig'); ig.href=S.href; ig.textContent=S.titulo+' ↗';
+
+  var root=document.documentElement, esc=document.getElementById('escena'), logo=document.getElementById('logo'), brillo=document.getElementById('brillo');
+  var carga=.9, manual=0, lx=innerWidth/2, ly=innerHeight*.4, t0=performance.now(), last=t0, R=innerWidth<600?150:200;
+  esc.style.setProperty('--r',R+'px');
+  function coloca(){ var r=logo.getBoundingClientRect(); brillo.style.left=r.left+'px'; brillo.style.top=r.top+'px'; brillo.style.width=r.width+'px'; brillo.style.height=r.height+'px'; }
+  function set(x,y){ lx=x; ly=y; esc.style.setProperty('--x',x.toFixed(1)+'px'); esc.style.setProperty('--y',y.toFixed(1)+'px'); }
+  function sigue(e){ set(e.clientX,e.clientY); manual=performance.now()+3500; document.body.classList.add('tocado'); }
+  esc.addEventListener('pointermove',sigue); esc.addEventListener('pointerdown',sigue);
+  function alumbra(){
+    var r=logo.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
+    return Math.hypot(lx-cx,ly-cy) < r.width*.5 + R*.35;
+  }
+  function frame(t){
+    requestAnimationFrame(frame);
+    var dt=Math.min(.05,(t-last)/1000); last=t;
+    if(t>manual && !reduce){
+      var w=innerWidth,h=innerHeight,k=(t-t0)/1000, ax=w<700?.3:Math.min(.22,280/w);
+      var tx=w*(.5+ax*Math.sin(k*.5)), ty=h*(.46+.26*Math.sin(k*.77+.6));
+      set(lx+(tx-lx)*.05, ly+(ty-ly)*.05);
+    }
+    carga+= alumbra() ? dt*.8 : -dt*.06;
+    carga=Math.max(0,Math.min(1,carga));
+    var e=Math.pow(carga,1.3);
+    root.style.setProperty('--k',carga.toFixed(3));
+    brillo.style.setProperty('--e',e.toFixed(3));
+  }
+  coloca(); set(lx,ly);
+  window.addEventListener('resize',function(){ coloca(); R=innerWidth<600?150:200; esc.style.setProperty('--r',R+'px'); });
+  requestAnimationFrame(function(t){ last=t; frame(t); });
+
+  var sw=document.getElementById('interruptor');
+  sw.addEventListener('click',function(){
+    var on=document.body.classList.toggle('luz');
+    sw.setAttribute('aria-pressed',on?'true':'false');
+    sw.querySelector('span').textContent=on?'apagar la luz':'encender la luz';
+  });
+})();
+</script>
+</body>
+</html>

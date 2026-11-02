@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23F0E424%22/%3E%3Ccircle cx=%2236%22 cy=%2240%22 r=%226%22/%3E%3Ccircle cx=%2264%22 cy=%2240%22 r=%226%22/%3E%3Cpath d=%22M30 60q20 22 40 0%22 stroke=%22black%22 stroke-width=%227%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>contacto · Jesús Villegas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comun/base.css">
+<link rel="stylesheet" href="comun/noche.css">
+<style>
+/* Contacto: el final de la noche. Se enciende el fluorescente, todo se queda en blanco y aparece cómo escribirle. */
+body{background:#000;transition:background-color .2s}
+.tubo{position:fixed;z-index:2;top:calc(70px + env(safe-area-inset-top,0px));left:50%;width:min(560px,74vw);height:16px;margin-left:calc(min(560px,74vw) / -2);border-radius:8px;background:#1a1a1a}
+.encendido .tubo{animation:tubo 1.1s steps(1,end) forwards}
+@keyframes tubo{0%{background:#fff;box-shadow:0 0 60px 20px rgba(255,255,255,.6)}10%{background:#1a1a1a;box-shadow:none}22%{background:#fff;box-shadow:0 0 60px 20px rgba(255,255,255,.6)}30%{background:#333;box-shadow:none}44%,100%{background:#fff;box-shadow:0 0 90px 30px rgba(255,255,255,.7)}}
+.velo{position:fixed;inset:0;z-index:0;background:#F7F7F2;opacity:0;pointer-events:none}
+.encendido .velo{animation:velo 1.1s steps(1,end) forwards}
+@keyframes velo{0%{opacity:.7}10%{opacity:0}22%{opacity:.85}30%{opacity:.1}44%,100%{opacity:1}}
+main{position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:130px;padding-bottom:70px}
+h1{color:#161616;transition:color .3s .5s}
+.frase{margin:26px 0 0;font-weight:800;font-size:clamp(26px,3.2vw,44px);letter-spacing:-.03em;line-height:1.12;max-width:22ch;color:#1c1c1c;transition:color .3s .5s}
+.acciones{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:40px;opacity:.25;transition:opacity .4s .55s}
+.acciones .btn{background:var(--amarillo);color:#0B0B0B;font-size:18px;padding:18px 26px}
+.acciones .mail{font-weight:700;font-size:16px;color:#2a2a2a;word-break:break-all}
+.acciones .copiar{border:0;border-radius:99px;padding:10px 14px;font-weight:800;font-size:13px;background:rgba(0,0,0,.08);color:#0B0B0B}
+.interruptor{position:fixed;z-index:3;right:var(--gx);bottom:calc(22px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:10px;border:0;border-radius:99px;padding:12px 18px 12px 12px;font-weight:800;font-size:15px;line-height:1;background:rgba(164,244,172,.12);color:var(--nv);transition:transform .16s var(--ease-out),background-color .3s,color .3s}
+.interruptor:active{transform:scale(.97)}
+.interruptor i{width:12px;height:12px;border-radius:50%;background:var(--nv);box-shadow:0 0 12px var(--nv)}
+.pista{margin:18px 0 0;font-size:14px;font-weight:700;color:#3e5a42;transition:opacity .3s}
+.encendido h1{color:#0B0B0B}
+.encendido .frase{color:#0B0B0B}
+.encendido .acciones{opacity:1}
+.encendido .pista{opacity:0}
+.encendido .interruptor{background:#0B0B0B;color:#fff}
+.encendido .interruptor i{background:var(--amarillo);box-shadow:none}
+.encendido .grano{opacity:0}
+body.encendido{--top-fg:#0B0B0B;--menu-bg:rgba(0,0,0,.07);--menu-fg:#0B0B0B}
+.grano{transition:opacity .4s .5s}
+</style>
+</head>
+<body>
+<div class="grano" aria-hidden="true"></div>
+<div class="velo" aria-hidden="true"></div>
+<span class="tubo" aria-hidden="true"></span>
+<header class="top"><a class="home" href="index.html">yisasvillegas</a><a class="menu-btn" href="index.html" data-menu>menú ≡</a></header>
+<main class="wrap">
+  <h1 class="h-xl">contacto</h1>
+  <p class="frase" id="frase"></p>
+  <div class="acciones">
+    <a class="btn" id="escribe"></a>
+    <span class="mail" id="mail"></span>
+    <button class="copiar" type="button" id="copiar">copiar el correo</button>
+  </div>
+  <p class="pista">enciende la luz para verlo</p>
+</main>
+<button class="interruptor" id="luz" type="button" aria-pressed="false"><i aria-hidden="true"></i><span>encender la luz</span></button>
+<script src="comun/datos.js"></script>
+<script src="comun/ui.js"></script>
+<script>
+(function(){
+  var Y=window.YISAS, C=Y.contacto;
+  document.getElementById('frase').textContent=C.texto;
+  var esc=document.getElementById('escribe'); esc.href='mailto:'+Y.email; esc.textContent=C.boton+' ↗';
+  document.getElementById('mail').textContent=Y.email;
+  var b=document.body, luz=document.getElementById('luz'), auto=0;
+  function pon(on){
+    b.classList.toggle('encendido',on);
+    luz.setAttribute('aria-pressed',on?'true':'false');
+    luz.querySelector('span').textContent=on?'apagar la luz':'encender la luz';
+  }
+  luz.addEventListener('click',function(){ clearTimeout(auto); pon(!b.classList.contains('encendido')); });
+  auto=setTimeout(function(){ pon(true); },YUI.reduce?300:2200);
+  document.getElementById('copiar').addEventListener('click',function(){
+    var bt=this;
+    function ok(){ bt.textContent='copiado ☺︎'; setTimeout(function(){ bt.textContent='copiar el correo'; },1800); }
+    if(navigator.clipboard) navigator.clipboard.writeText(Y.email).then(ok,function(){ bt.textContent=Y.email; });
+    else bt.textContent=Y.email;
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23F0E424%22/%3E%3Ccircle cx=%2236%22 cy=%2240%22 r=%226%22/%3E%3Ccircle cx=%2264%22 cy=%2240%22 r=%226%22/%3E%3Cpath d=%22M30 60q20 22 40 0%22 stroke=%22black%22 stroke-width=%227%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>otros proyectos · Jesús Villegas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comun/base.css">
+<link rel="stylesheet" href="comun/noche.css">
+<link rel="stylesheet" href="comun/tele.css">
+<style>
+/* Otros proyectos: la tele es la única luz del cuarto y lo tiñe del color de cada canal. */
+body{--luz:#E8201C;background:#030303}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 55% at 50% 42%,var(--luz),transparent 70%);opacity:.13;transition:background .6s}
+main{position:relative;z-index:1;padding-top:104px;padding-bottom:90px}
+.cab{max-width:980px;margin:0 auto 36px}
+.cab h1{color:#ecebe6}
+.cab p{margin:16px 0 0;font-weight:600;font-size:17px;color:#8b8a84}
+.ahora-t{color:#ecebe6}
+.ahora-a{background:var(--nv);color:#03140a}
+.guia{--guia-linea:rgba(255,255,255,.08);--guia-btn:rgba(255,255,255,.08);--guia-hi:var(--nv);color:#d8d7d1}
+</style>
+</head>
+<body data-up>
+<div class="grano" aria-hidden="true"></div>
+<header class="top"><a class="home" href="index.html">yisasvillegas</a><a class="menu-btn" href="index.html" data-menu>menú ≡</a></header>
+<main class="wrap">
+  <div class="cab"><h1 class="h-l">otros proyectos</h1><p>Cambia de canal con el mando, deslizando la pantalla o con las flechas.</p></div>
+  <div id="tele"></div>
+</main>
+<script src="comun/datos.js"></script>
+<script src="comun/ui.js"></script>
+<script src="comun/tele.js"></script>
+<script>
+Tele.montar(document.getElementById('tele'),{tema:'oscuro',onCanal:function(i,color){ document.body.style.setProperty('--luz',color); }});
+</script>
+</body>
+</html>
