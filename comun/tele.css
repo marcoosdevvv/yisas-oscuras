@@ -24,7 +24,7 @@
 .tele-mando .rk{width:46px;height:46px;border-radius:50%;border:0;background:#33312e;color:#f2f2ee;font-weight:900;font-size:16px;border-bottom:4px solid #0c0c0b;transition:transform .07s,border-bottom-width .07s}
 .tele-mando .rk:active{transform:translateY(3px);border-bottom-width:1px}
 .tele-mando .rk[aria-pressed="true"]{background:#F0E424;color:#0B0B0B}
-.tele-mando .ch{width:auto;padding:0 16px;border-radius:99px;font-size:14px;white-space:nowrap}
+.tele-mando .ch{width:auto;padding:0 16px;border-radius:99px;font-size:14px;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:5px}
 
 .tele-ahora{position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;max-width:980px;margin:26px auto 0}
 .tele-ahora p{margin:0;font-weight:700;font-size:17px;max-width:46ch}
@@ -58,8 +58,11 @@
   .tele-dial::before{width:6px;height:18px;transform:translateY(-8px)}
   .tele-rejilla{min-height:30px;height:30px}
   .tele-osd{top:20px;right:24px}
-  .tele-mando{gap:6px;padding:10px;border-radius:22px}
-  .tele-mando .rk{width:40px;height:40px;font-size:15px}
+  .tele-mando{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;padding:12px;border-radius:22px}
+  .tele-mando .rk{width:100%;height:auto;aspect-ratio:1;max-width:52px;justify-self:center;font-size:15px}
+  .tele-mando .ch{padding:0;border-radius:50%}
+  .tele-mando .ch span{display:none}
+  .tele-mando [data-step="1"]{order:2}
   .guia li{grid-template-columns:40px minmax(0,1fr);gap:12px}
   .guia li a{grid-column:2;justify-self:start}
 }

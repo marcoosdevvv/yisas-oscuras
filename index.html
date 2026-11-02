@@ -53,7 +53,6 @@ body{overflow:hidden}
 <div class="hud" aria-hidden="true"><span class="rec">REC</span><span><span id="tc">00:00:00:00</span> · IR</span></div>
 <main class="escena" id="escena">
   <div class="verde">
-    <p class="lema" id="lema"></p>
     <img class="foto" src="comun/img/yisas.webp" alt="Jesús Villegas">
     <nav class="links" id="links" aria-label="Secciones"></nav>
     <p class="dominio">yisasvillegas.com</p>
@@ -69,7 +68,6 @@ body{overflow:hidden}
 <script>
 (function(){
   var Y=window.YISAS, reduce=YUI.reduce;
-  document.getElementById('lema').textContent=Y.lema;
   document.getElementById('links').innerHTML=Y.secciones.map(function(s){
     return '<a href="'+s.href+'"'+(s.fuera?' target="_blank" rel="noopener"':'')+'>'+YUI.esc(s.texto)+(s.fuera?' ↗':'')+'</a>';
   }).join('');

@@ -75,7 +75,7 @@ window.Maquina = (function () {
         '<h3>' + esc(c.nombre) + '</h3>' +
         (c.grupo ? '<p class="t-grupo">' + esc(Y.grupos[c.grupo]) + '</p>' : '') +
         '<div class="t-links">' + linksDe(c) + '</div>' +
-        '<div class="t-pie"><span>gracias, gente rara ☺︎<br>' + esc(Y.dominio) + '</span>' + barcode(c.code) + '</div>';
+        '<div class="t-pie"><span>gracias ☺︎<br>' + esc(Y.dominio) + '</span>' + barcode(c.code) + '</div>';
       placeTicket();
       ticket.hidden = false;
       ticket.classList.remove('imprime', 'visto');

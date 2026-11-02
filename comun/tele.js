@@ -34,7 +34,7 @@ window.Tele = (function () {
         '<div class="tele-lado" aria-hidden="true"><span class="tele-marca">villegas ☺︎</span><span class="tele-dial"></span><span class="tele-rejilla"></span><span class="tele-led"></span></div>' +
       '</div>' +
       '<div class="tele-mando" role="group" aria-label="Mando">' +
-        '<button class="rk ch" type="button" data-step="-1">◀ ch</button>' + botones + '<button class="rk ch" type="button" data-step="1">ch ▶</button>' +
+        '<button class="rk ch" type="button" data-step="-1" aria-label="Canal anterior"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10.5 3 5 8l5.5 5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>ch</span></button>' + botones + '<button class="rk ch" type="button" data-step="1" aria-label="Canal siguiente"><span>ch</span><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M5.5 3 11 8l-5.5 5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
       '</div>' +
       '<div class="tele-ahora"><p class="ahora-t"></p><a class="btn ahora-a" target="_blank" rel="noopener"></a></div>' +
       '<section class="guia" aria-labelledby="guia-h"><h2 id="guia-h">programación</h2><ol>' +
